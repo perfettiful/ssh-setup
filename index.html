@@ -18,7 +18,7 @@
 
 <body>
     <header>
-        <h1>SSH Setup For Absolute Beginners</h1>
+        <h1>SSH Setup For Beginners</h1>
         <p>A simplified guide to setting up your SSH connection for the first time.</p>
     </header>
     <main>
@@ -44,6 +44,26 @@
                     keeping
                     explanations and instructions simple and straightforward.
                 </p>
+            </section>
+            <section id="generate-the-ssh-key">
+                <h1>Check for existing SSH Key</h1>
+                <br>
+                <code>IMPORTANT: If you've already have an SSH Key generated, it can be reused!</code>
+
+                <br>
+                <ul>
+                    <li>Enter <code>ls -al ~/.ssh</code> in your terminal (Git Bash for Windows or Terminal for macOS)
+                        to see if any existing SSH keys are present. Look for a public SSH key that ends in
+                        <code>.pub</code>. For example, <code>id_rsa.pub</code>, <code>id_ecdsa.pub</code>, or
+                        <code>id_ed25519.pub</code>.
+                    </li>
+                    <li>If you see an existing SSH key pair (a public SSH key like id_rsa.pub and a private SSH key like
+                        id_rsa), then you can skip generating a new SSH key and use your existing keys to add to the
+                        ssh-agent in a later step</li>
+
+                    <li>If you receive an error that it doesn't exist, that means you'll need to generate a new SSH key
+                        pair, which we will do next!</li>
+                </ul>
             </section>
             <section id="generate-the-ssh-key">
                 <h1>Generate the SSH Key</h1>
@@ -144,8 +164,9 @@
                 <p>The process for testing GitLab is very similar.</p>
                 <ul>
                     <li>Open Git Bash.</li>
-                    <li>To test your GitLab connection, enter <code>ssh -T git@[your organization name].com</code></li>
-                    <li class="second-level-li">For example, for our class repo, you would enter
+                    <li>To test your GitLab connection, enter <br><code>ssh -T git@[your organization name].com</code>
+                    </li>
+                    <li class="second-level-li">For example, for our class repo, you would enter <br>
                         <code>ssh -T git@git.bootcampcontent.com</code>.
                     </li>
                     <li>If your output looks like <code>Welcome to GitLab, @[username]!</code>, the connection was
