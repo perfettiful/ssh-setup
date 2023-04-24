@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSH Key Setup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css" />
+    <meta property="og:title" content="SSH Setup For Absolute Beginners" />
+    <meta property="og:image" content="assets/background-1.jpg">
+    <meta property="og:description"
+        content="A simplified guide to setting up your SSH connection for the first time." />
+</head>
+
+<body>
+    <header>
+        <h1>SSH Setup For Absolute Beginners</h1>
+        <p>A simplified guide to setting up your SSH connection for the first time.</p>
+    </header>
+    <main>
+        <img src="assets/background-1.jpg" alt="coding-image">
+        <div class="author-header">
+            <h2>Nathan Perfetti</h2>
+            <p>April 23, 2023</p>
+        </div>
+        <div class="content">
+            <section id="introduction">
+                <h1>Introduction</h1>
+                <p>
+                    As a developer, having a platform to host the code you write is very important.
+                    Expect to write a lot of code locally in addition to pushing your
+                    code to a remote repository on services such as GitLab or GitHub. SSH keys allows
+                    us to connect our computer to GitHub and easily push or pull any changes in our repository. However,
+                    there is a process to establishing that relationship between your computer and
+                    your remote repositories on GitHub or GitLab, and it can be tricky to set up.
+                    <br><br>
+                    There are many guides out there that overwhelm the reader with various SSH protocols and jargon
+                    that might intimidate or confuse newer developers. This guide aims to assist newer developers with
+                    establishing an SSH connection with their local machine and their remote repositories, all while
+                    keeping
+                    explanations and instructions simple and straightforward.
+                </p>
+            </section>
+            <section id="generate-the-ssh-key">
+                <h1>Generate the SSH Key</h1>
+                <p>
+                    Like I said earlier, the SSH key is important for establishing the connection between your computer
+                    and
+                    GitHub (or whichever repository service you use). Here are the steps to generating the key:
+                </p>
+                <ul>
+                    <li>For Windows users, open GitLab organization. Bash.</li>
+                    <li>For MacOS users, the default terminal will be fine.</li>
+                    <li>Enter <code>ssh-keygen</code>, it will begin generating the key.</li>
+                    <li>You will be prompted multiple times, keep hitting enter until no more prompts appear.</li>
+                </ul>
+                <p>After running <code>ssh-keygen</code>, your terminal should look like this:</p>
+                <img src="assets/output.png" alt="console-output">
+                <p>
+                    Believe it or not, that's pretty much all there is to generating the key! Albeit we used the
+                    quickest method to do it. We actually just generated two keys, but really we only need the public
+                    key.
+                </p>
+                <ul>
+                    <li>
+                        The first key we generated, inside <code>id_rsa</code>, is the private key, this key exists only
+                        on our machine
+                        and should NOT be shared with anyone (hence why it's private).
+                    </li>
+                    <li>
+                        The second one, inside <code>id_rsa.pub</code>, is the public key. This is the one we need to
+                        share with whatever service
+                        we're using to complete the connection.
+                    </li>
+                </ul>
+            </section>
+            <section id="grabbing-the-key">
+                <h1>Grabbing the Public Key</h1>
+                <p>
+                    The public key we just generated needs to be shared with whatever service we're using in order for
+                    the connection to be completely
+                    established. In order to copy the key to our clipboard, we need to navigate to the
+                    <code>.ssh/</code> directory, which is located in our
+                    home directory.
+                </p>
+                <ul>
+                    <li>
+                        In your terminal, type <code>cd ~/.ssh/</code> and hit enter. This folder contains all things
+                        SSH, including our private and public keys.
+                    </li>
+                    <li>
+                        Type <code>cat id_rsa.pub</code> and hit enter. Your public key will be displayed.
+                    </li>
+                    <li>
+                        Select the entire key and hit <code>CTRL+C</code>.
+                    </li>
+                </ul>
+                <p>All that's left to do is add our key to any repository hosting service of our choice. The following
+                    steps will entail how to add your key to GitHub and GitLab.</p>
+            </section>
+            <section id="add-key-to-gh">
+                <h1>Add the SSH Key to GitHub</h1>
+                <ul>
+                    <li>Log in to GitHub.</li>
+                    <li>Navigate to <code>https://github.com/settings/ssh/new</code>.</li>
+                    <li>Add a title, select <code>Authentication Key</code> for key type, and paste the public SSH key
+                        we copied into the box labeled <code>Key</code>.</li>
+                </ul>
+                <img src="assets/github-key.png" alt="github-key">
+                <p>Click <code>Add SSH Key</code> when you're finished.</p>
+            </section>
+            <section id="add-key-to-gl">
+                <h1>Add the SSH Key to GitLab</h1>
+                <ul>
+                    <li>Log in to your GitLab organization.</li>
+                    <li>Edit your profile by clicking on your profile icon in the top right of the page and selecting
+                        <code>Edit Profile</code>.
+                    </li>
+                    <li>Click on <code>SSH Keys</code> located on the left sidebar.</li>
+                    <li>Paste your key inside the box labeled <code>Key</code>, and add a title for your key.</li>
+                </ul>
+                <img src="assets/gitlab-setup.png" alt="gitlab-key">
+                <p>Click <code>Add Key</code> when you're finished.</p>
+            </section>
+            <section id="testing-the-github-connection">
+                <h1>Testing the GitHub Connection</h1>
+                <p>Now that we shared our keys with our services, we need to verify that the connection works. We can
+                    actually entirely through Git Bash!</p>
+                <ul>
+                    <li>Open Git Bash.</li>
+                    <li>To test your GitHub connection, type <code>ssh -T git@github.com</code>, and hit enter.</li>
+                    <li>Your output might look a little different, but if it displays
+                        <code>Hi [username]! You've successfully authenticated, but GitHub does not provide shell access.</code>,
+                        the connection was successful.
+                    </li>
+                </ul>
+            </section>
+            <section id="testing-the-gitlab-connection">
+                <h1>Testing the GitLab Connection</h1>
+                <p>The process for testing GitLab is very similar.</p>
+                <ul>
+                    <li>Open Git Bash.</li>
+                    <li>To test your GitLab connection, enter <code>ssh -T git@[your organization name].com</code></li>
+                    <li class="second-level-li">For example, for our class repo, you would enter
+                        <code>ssh -T git@git.bootcampcontent.com</code>.
+                    </li>
+                    <li>If your output looks like <code>Welcome to GitLab, @[username]!</code>, the connection was
+                        successful.</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

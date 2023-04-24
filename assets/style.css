@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    background-color: rgb(32, 32, 32);
+}
+
+body {
+    display: block;
+    width: 350px;
+    margin: 0 auto;
+}
+
+img {
+    display: block;
+    width: 100%;
+    margin: 35px 0;
+}
+
+code {
+    color: orange;
+    padding: 3px;
+    background-color: rgb(19, 19, 19);
+    border-radius: 7px;
+    font-family: Consolas,"courier new"
+}
+
+main {
+    padding-bottom: 35px;
+}
+
+header {
+    padding: 35px 0;
+}
+
+header {
+    border-bottom: 3px solid rgb(255, 243, 74);
+}
+
+header h1 {
+    font-size: 2em;
+}
+
+header p,
+.content p,
+.content ul {
+    font-size: 1em;
+}
+
+.content section {
+    padding: 20px 0;
+}
+
+header p,
+.content p,
+.content h1,
+.content ul {
+    padding-top: 22px;
+}
+
+.content ul {
+    padding-left: 20px;
+}
+
+.author-header p {
+    margin-top: 4px;
+}
+
+.content {
+    line-height: 1.5;
+}
+
+.second-level-li {
+    margin-left: 20px;
+    list-style-type: circle;
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        width: 730px;
+    }
+
+    header h1 {
+        font-size: 3.5em;
+    }
+
+    header p,
+    .content p,
+    .content ul {
+        font-size: 1.3em;
+    }
+}
